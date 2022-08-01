@@ -42,7 +42,7 @@ class Compressor:
         
         #scaler: the number the matrix is divided when compressed and multiply when decompressed
         #top_percent_threshold: the top % of individual pixels you keep after calculating argument of complex number
-        #eps: when compressing the picture, you sum the imaginary or real number this eps to avoid errors when number is 0
+        #eps: when compressing the picture, use eps in the imaginary or real number to avoid errors when that particular number is 0
 
     def compress(self, img: np.ndarray, axis: int = 2) -> List[Sparse]:
         """Compress."""
