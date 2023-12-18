@@ -1,8 +1,8 @@
 # Image_Compressor
-Image compressor using Fourier transform, sparse matrix and parallelization
+Image compressor utilizing Fourier transform, sparse matrix, and parallelization
 
-Custom image compressor made for a particular problem at work.
-Given a dictionary (key : item_id, value: numpy array of picture), we wanted to reduce the storage space of the images.
-We apply Fourier transform to the images and get the matrix of complex numbers. We calculate the argument of each pixel, and keep the best ones given a certain top percentage. When we have this pixels, we separete the real and the imaginary numbers, and store them in a different sparce matrix. We reduce the image store space by 25-35% approximately. We used this instead of, for example, storing the pictures in jpeg, because we needed to store the images as pickles in a bucket in big query when not being used. Instead of storing 199M jpeg, we stored lists of sparse matrixes as pickles, divided by country and category based on our use case. In the case of an RGB picture, we compress each channel independently, so the result is a list of 6 sparce matrixes per picture. (3 made of real numbers and 3 made of imaginary numbers). We then combine the decompress process (the opposite steps from the compress process) in the generator used to feed the neural net. With the storage saved from the compression, we are able to increase batch size and avoid reaching maximum ram capacity.
+Custom image compressor.
+Given a dictionary (key: item_id, value: numpy array of a picture), I aimed to reduce the storage space of the images.
+I applied Fourier transform to the images and obtained the matrix of complex numbers. I calculated the argument of each pixel and retained the best ones given a certain top percentage. When I had these pixels, I separated the real and the imaginary numbers, storing them in different sparse matrices. The image storage space was reduced by approximately 25-35%. I chose this approach over, for example, storing the pictures in JPEG because I needed to store the images as pickles in a bucket in BigQuery when not in use. Instead of storing 199M JPEGs, I stored lists of sparse matrices as pickles, divided by country and category based on my use case. In the case of an RGB picture, I compressed each channel independently, resulting in a list of 6 sparse matrices per picture (3 made of real numbers and 3 made of imaginary numbers). I then combined the decompression process (the opposite steps from the compression process) in the generator used to feed the neural net. With the storage saved from the compression, I am able to increase the batch size and avoid reaching the maximum RAM capacity.
 
-Jupyter notebook shows an example.
+The Jupyter notebook shows an example.
