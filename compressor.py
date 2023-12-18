@@ -1,4 +1,4 @@
-"""Compressor module."""
+"""Compressor module"""
 from typing import List, Union
 
 import numpy as np
@@ -6,7 +6,7 @@ from scipy.sparse import coo_matrix
 
 
 class Sparse:
-    """Sparse."""
+    """Sparse"""
 
     def __init__(self, data_real, data_imag, rows, cols):
         self.data_real = data_real
@@ -26,7 +26,7 @@ class Sparse:
 
 
 class Compressor:
-    """Compressor."""
+    """Compressor"""
 
     def __init__(
         self,
@@ -45,7 +45,7 @@ class Compressor:
         #eps: when compressing the picture, use eps in the imaginary or real number to avoid errors when that particular number is 0
 
     def compress(self, img: np.ndarray, axis: int = 2) -> List[Sparse]:
-        """Compress."""
+        """Compress"""
         if len(img.shape) == 2:
             return self._compress_single(img)
         elif len(img.shape) > 2:
@@ -88,7 +88,7 @@ class Compressor:
         return np.fft.ifft2(sparse_matrix.toarray()).real
 
     def decompress(self, sparse: Union[Sparse, List]):
-        """Decompress."""
+        """Decompress"""
         if isinstance(sparse, Sparse):
             return self._decompress_single(sparse) * self.scaler
         elif isinstance(sparse, List):
